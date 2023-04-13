@@ -5,20 +5,18 @@ const https = require("https");
 
 const app = express();
 
-const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',]
+const dateOptions = {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+  weekday: "long",
+};
+const fullDate = new Date().toLocaleDateString("en-us", dateOptions);
 
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  const todayDate = `${new Date().getDate()}/${
-    new Date().getMonth() + 1
-  }/${new Date().getFullYear()}`;
-  const dayOfWeek = week[new Date().getDay()]
-
-  res.render('list', {
-    todayDate: todayDate,
-    dayOfWeek: dayOfWeek
-  })
+  res.render("list", { todayFullDate: fullDate });
 });
 
 app.listen(3000, () => {
