@@ -20,7 +20,8 @@ const fullDate = new Date().toLocaleDateString("en-us", dateOptions);
 let taskList = [];
 
 app.get("/", (req, res) => {
-  res.render("list", { todayFullDate: fullDate, taskList: taskList });
+  const listType = "Home"
+  res.render("list", { listType: listType, todayFullDate: fullDate, taskList: taskList });
 });
 
 app.post("/", (req, res) => {
@@ -33,12 +34,4 @@ app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
 
-function toggleLineThrough(checkbox) {
-  let p = checkbox.parentElement.parentElement.querySelector("p");
-  if (checkbox.checked) {
-    p.classList.add('task-done');
-  } else {
-    p.classList.remove('task-done');
-  }
-}
 
