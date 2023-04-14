@@ -9,18 +9,20 @@
     <link rel="stylesheet" href="styles/styles.css" />
   </head>
   <body>
-    <h1><%= todayFullDate %></h1>
+    <div class="container">
+      <h1><%= todayFullDate %></h1>
+    </div>
 
-    <form action="/" method="post">
-        <input type="text" name="newTask" placeholder="Enter Your Task">
+    <div class="task-list">
+      <form action="/" method="post">
+        <input type="text" name="newTask" placeholder="Enter Your Task" />
         <button type="submit" name="submit">Add to list</button>
-    </form>
-    <ul>
+      </form>
+      <ul>
         <% for (var i = 0; i < taskList.length; i++) { %>
-        <li>
-            <%= taskList[i] %>
-        </li>
+        <li><%= taskList[i] %></li>
         <% } %>
-    </ul>
+      </ul>
+    </div>
   </body>
 </html>
