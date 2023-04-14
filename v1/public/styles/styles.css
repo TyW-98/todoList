@@ -35,6 +35,7 @@ body {
     text-align: left;
     padding-left: 35px;
     height: auto;
+    margin-bottom: 10px;
 }
 
 .task-done {
@@ -58,6 +59,10 @@ body {
 
 .task-checkbox:checked+p {
     text-decoration: line-through;
+}
+
+.created-date {
+    font-size: 12px;
 }
 
 .input-form button {
