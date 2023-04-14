@@ -20,15 +20,17 @@
           <p><%= taskList[i] %></p>
         </div>
         <div class="task-info">
-          <input type="checkbox">
+          <input type="checkbox" class="task-checkbox" onchange="toggleLineThrough(this)">
         </div>
       </div>
       <% } %>
 
       <form action="/" method="post" class="input-form">
-        <input type="text" name="newTask" placeholder="Enter Your Task" />
+        <input type="text" name="newTask" placeholder="Enter New Task" />
         <button type="submit" name="submit">+</button>
       </form>
     </div>
+
+    <script src="script/task.js"></script>
   </body>
 </html>
