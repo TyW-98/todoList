@@ -91,4 +91,10 @@ button {
     margin-left: 15px;
     position: relative;
     left: 10px;
+    margin-right: 10px;
+}
+
+::placeholder {
+    color: rgb(17, 51, 165);
+    opacity: 1;
 }
