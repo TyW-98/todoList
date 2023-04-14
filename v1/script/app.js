@@ -19,13 +19,13 @@ const fullDate = new Date().toLocaleDateString("en-us", dateOptions);
 let taskList = [];
 
 app.get("/", (req, res) => {
-  res.render("list", { todayFullDate: fullDate , taskList: taskList});
+  res.render("list", { todayFullDate: fullDate, taskList: taskList });
 });
 
 app.post("/", (req, res) => {
-    taskList.push(req.body.newTask)
+  taskList.push(req.body.newTask);
 
-    res.redirect("/")
+  res.redirect("/");
 });
 
 app.listen(3000, () => {
