@@ -3,8 +3,28 @@ body {
     text-align: center;
 }
 
-h1 {
+.header {
     color: rgb(8, 8, 7);
     font-family: cursive;
-    margin-top: 150px;
+    text-decoration: underline;
+    background-color: darkkhaki;
+    width: 50%;
+    margin: 9.375rem auto 0;
+    padding: 1px 20px;
+    border-radius: 25px;
+}
+
+.task-list {
+    margin: 3.125rem auto;
+    width: 50%;
+}
+
+.task {
+    background-color: white;
+    border-radius: 1.5625rem;
+    border: solid 1px black;
+}
+
+.task:last-of-type {
+    margin-bottom: 3.125rem;
 }
