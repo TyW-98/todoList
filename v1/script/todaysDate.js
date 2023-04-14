@@ -1,6 +1,6 @@
 exports.getTodaysDate = function () {
 
-  let dateOptions = {
+  const dateOptions = {
     day: "numeric",
     month: "short",
     year: "numeric",

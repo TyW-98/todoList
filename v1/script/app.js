@@ -10,10 +10,10 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-let homeTaskList = [];
-let workTaskList = [];
+const homeTaskList = [];
+const workTaskList = [];
 
-let fullDate = date.getTodaysDate();
+const fullDate = date.getTodaysDate();
 
 app.get("/", (req, res) => {
   let listType = "Home";
