@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const https = require("https");
-const getTodaysDate = require(path.join(__dirname, "todaysDate.js"));
+const date = require(path.join(__dirname, "todaysDate.js"));
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.use(express.static("public"));
 let homeTaskList = [];
 let workTaskList = [];
 
-let fullDate = getTodaysDate();
+let fullDate = date.getTodaysDate();
 
 app.get("/", (req, res) => {
   let listType = "Home";
