@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const https = require("https");
+const date = require(path.join(__dirname, "todaysDate.js"));
 
 const app = express();
 
@@ -9,16 +10,10 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-const dateOptions = {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  weekday: "long",
-};
+const homeTaskList = [];
+const workTaskList = [];
 
-const fullDate = new Date().toLocaleDateString("en-us", dateOptions);
-let homeTaskList = [];
-let workTaskList = [];
+const fullDate = date.getTodaysDate();
 
 app.get("/", (req, res) => {
   let listType = "Home";
