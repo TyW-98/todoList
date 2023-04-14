@@ -1,4 +1,4 @@
-module.exports.getTodaysDate = function () {
+exports.getTodaysDate = function () {
 
   let dateOptions = {
     day: "numeric",
@@ -10,8 +10,8 @@ module.exports.getTodaysDate = function () {
   return new Date().toLocaleDateString("en-us", dateOptions);
 };
 
-module.exports.getTodaysDay = function () {
-  
+exports.getTodaysDay = function () {
+
   const dayOptions = {
     weekday: "long",
   };
