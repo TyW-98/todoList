@@ -16,8 +16,12 @@
     <div class="task-list">
       <% for (var i = 0; i < taskList.length; i++) { %>
       <div class="task">
-        <p><%= taskList[i] %></p>
-        <input type="checkbox">
+        <div class="task-text">
+          <p><%= taskList[i] %></p>
+        </div>
+        <div class="task-info">
+          <input type="checkbox">
+        </div>
       </div>
       <% } %>
 

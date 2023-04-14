@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(206, 144, 10);
+    background-color: rgb(212, 188, 135);
     text-align: center;
 }
 
@@ -7,7 +7,7 @@ body {
     color: rgb(8, 8, 7);
     font-family: cursive;
     text-decoration: underline;
-    background-color: darkkhaki;
+    background-color: rgb(69, 162, 179);
     width: 50%;
     margin: 9.375rem auto 0;
     padding: 1px 20px;
@@ -20,11 +20,30 @@ body {
 }
 
 .task {
-    background-color: white;
-    border-radius: 1.5625rem;
+    background-color: rgb(46, 154, 187);
     border: solid 1px black;
+    display: flex;
+    flex-direction: row;
+}
+
+.task-text {
+    flex-basis: 80%; 
+    text-align: left; 
+    padding-left: 25px;
+    height: auto; 
+}
+
+.task-info {
+    margin: auto 0;
+}
+
+.task:first-child {
+    border-top-left-radius: 1.5625rem;
+    border-top-right-radius: 1.5625rem;
 }
 
 .task:last-of-type {
     margin-bottom: 3.125rem;
+    border-bottom-left-radius: 1.5625rem;
+    border-bottom-right-radius: 1.5625rem;
 }
