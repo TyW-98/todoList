@@ -1,13 +1,14 @@
 body {
-    background-color: rgb(212, 188, 135);
+    background-color: rgb(233, 215, 176);
     text-align: center;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .header {
     color: rgb(8, 8, 7);
     font-family: cursive;
     text-decoration: underline;
-    background-color: rgb(69, 162, 179);
+    background-color: rgba(69, 162, 179, 0.438);
     width: 50%;
     margin: 9.375rem auto 0;
     padding: 1px 20px;
@@ -16,21 +17,23 @@ body {
 
 .task-list {
     margin: 3.125rem auto;
-    width: 50%;
+    width: 50%;;
 }
 
 .task {
-    background-color: rgb(46, 154, 187);
     border: solid 1px black;
     display: flex;
     flex-direction: row;
+    font-size: 20px;
+    font-weight: 400;
+    background-color:rgba(83, 132, 224, 0.384);
 }
 
 .task-text {
-    flex-basis: 80%; 
-    text-align: left; 
-    padding-left: 25px;
-    height: auto; 
+    flex-basis: 80%;
+    text-align: left;
+    padding-left: 35px;
+    height: auto;
 }
 
 .task-info {
@@ -46,4 +49,37 @@ body {
     margin-bottom: 3.125rem;
     border-bottom-left-radius: 1.5625rem;
     border-bottom-right-radius: 1.5625rem;
+}
+
+.input-form button {
+    border-radius: 50%;
+    background-color: cadetblue;
+    color: black;
+    font-size: 24pt;
+    font-weight: 600;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+}
+
+.input-form {
+    background-color: rgba(131, 206, 177, 0.466);
+    border-radius: 25px;
+    padding: 15px 0;
+}
+
+input[type="text"] {
+    height: 60px;
+    text-align: center;
+    background: transparent;
+    font-size: 20px;
+    font-weight: 400;
+    border: none;
+    width: 77.5%;
+}
+
+button {
+    margin-left: 15px;
+    position: relative;
+    left: 10px;
 }
