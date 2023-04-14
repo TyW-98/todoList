@@ -17,18 +17,28 @@ const dateOptions = {
 };
 
 const fullDate = new Date().toLocaleDateString("en-us", dateOptions);
-let taskList = [];
+let homeTaskList = [];
+let workTaskList = [];
 
 app.get("/", (req, res) => {
-  const listType = "Home"
-  res.render("list", { listType: listType, todayFullDate: fullDate, taskList: taskList });
+  let listType = "Home"
+  res.render("list", { listType: listType, todayFullDate: fullDate, taskList: homeTaskList });
 });
 
 app.post("/", (req, res) => {
-  taskList.push(req.body.newTask);
-
+  homeTaskList.push(req.body.newTask);
   res.redirect("/");
 });
+
+app.get("/work", (req, res) => {
+  let listType = "Work"
+  res.render("list", { listType: listType, todayFullDate: fullDate, taskList: workTaskList });
+});
+
+app.post("/work", (req, res) => {
+  workTaskList.push(req.body.newTask)
+  res.redirect("/work")
+})
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
