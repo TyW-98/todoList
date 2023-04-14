@@ -7,6 +7,14 @@
     <title>To do list</title>
   </head>
   <body>
-    <h1>Today's List - (<%= todayFullDate %>)</h1>
+    <h1><%= todayFullDate %></h1>
+
+    <form action="/" method="post">
+        <input type="text" name="newTask" placeholder="Enter Your Task">
+        <button type="submit" name="submit">Add to list</button>
+    </form>
+    <ul>
+        <li>Buy Lady Finger</li>
+    </ul>
   </body>
 </html>
