@@ -14,7 +14,11 @@
         <button type="submit" name="submit">Add to list</button>
     </form>
     <ul>
-        <li>Buy Lady Finger</li>
+        <% for (var i = 0; i < taskList.length; i++) { %>
+        <li>
+            <%= taskList[i] %>
+        </li>
+        <% } %>
     </ul>
   </body>
 </html>
