@@ -5,23 +5,21 @@
 </div>
 
 <div class="task-list">
-  <% for (var i = 0; i < taskList.length; i++) { %>
-  <div class="task">
-    <div class="task-text">
-      <p><%= taskList[i] %></p>
-      <span class="created-date" data-original-date="<%= todayFullDate %>"
-        >(<%= todayFullDate %>)</span
-      >
+  <% taskList.forEach((task) => { %>
+    <div class="task">
+      <div class="task-text">
+        <p><%= task.name %></p>
+        <span class="created-date" data-original-data="<%= todayFullDate %>">(<%= todayFullDate %>)</span>
+      </div>
+      <div class="task-info">
+        <input
+          type="checkbox"
+          class="task-checkbox"
+          onchange="toggleLineThrough(this)"
+        />
+      </div>
     </div>
-    <div class="task-info">
-      <input
-        type="checkbox"
-        class="task-checkbox"
-        onchange="toggleLineThrough(this)"
-      />
-    </div>
-  </div>
-  <% } %>
+  <% }) %>
 
   <form action="/" method="post" class="input-form">
     <input
@@ -33,4 +31,5 @@
     <button type="submit" name="submitBtn" value=<%= listType %>>+</button>
   </form>
 </div>
+
 <%- include('footer'); -%>
