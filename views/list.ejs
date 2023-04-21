@@ -1,0 +1,35 @@
+<%- include('headers'); -%>
+
+<div class="header">
+  <h1><%= listType %></h1>
+</div>
+
+<div class="task-list">
+  <% taskList.forEach((task) => { %>
+    <div class="task">
+      <div class="task-text">
+        <p><%= task.name %></p>
+        <span class="created-date" data-original-data="<%= todayFullDate %>">(<%= todayFullDate %>)</span>
+      </div>
+      <div class="task-info">
+        <input
+          type="checkbox"
+          class="task-checkbox"
+          onchange="toggleLineThrough(this)"
+        />
+      </div>
+    </div>
+  <% }) %>
+
+  <form action="/" method="post" class="input-form">
+    <input
+      type="text"
+      name="newTask"
+      placeholder="Enter New Task"
+      autocomplete="off"
+    />
+    <button type="submit" name="submitBtn" value=<%= listType %>>+</button>
+  </form>
+</div>
+
+<%- include('footer'); -%>
