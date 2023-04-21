@@ -36,24 +36,29 @@ const task3 = new Task({
 
 const defaultItems = [task1, task2, task3];
 
-// Task.insertMany(defaultItems)
-//   .then(() => {
-//     console.log("Successfully added task to database");
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-
 const fullDate = date.getTodaysDate();
 
 app.get("/", (req, res) => {
-
   let listType = "Home";
 
-  Task.find().then (task => {
-    res.render("list", {listType: listType, todayFullDate: fullDate, taskList: task})
-  })
+  Task.find().then((task) => {
+    if (task.length === 0) {
+      Task.insertMany(defaultItems)
+        .then(() => {
+          console.log("Successfully added task to database");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      res.redirect("/");
+    }
 
+    res.render("list", {
+      listType: listType,
+      todayFullDate: fullDate,
+      taskList: task,
+    });
+  });
 });
 
 // app.post("/", (req, res) => {
