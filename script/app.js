@@ -3,15 +3,24 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const https = require("https");
 const date = require(path.join(__dirname, "todaysDate.js"));
+const mongoose = require("mongoose");
+
+mongoose.connect("mongodb://127.0.0.1:27017/todoListDB")
+
+const taskSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "Need to enter task name"]
+  }
+});
+
+const Task = mongoose.model("Task", taskSchema);
 
 const app = express();
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-
-const homeTaskList = [];
-const workTaskList = [];
 
 const fullDate = date.getTodaysDate();
 
