@@ -4,6 +4,7 @@ const path = require("path");
 const https = require("https");
 const date = require(path.join(__dirname, "todaysDate.js"));
 const mongoose = require("mongoose");
+const _ = require("lodash");
 
 const app = express();
 
@@ -23,7 +24,19 @@ const taskSchema = new mongoose.Schema({
   },
 });
 
+const listSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "Need to enter task name"],
+  },
+  items: {
+    type: [taskSchema],
+  },
+});
+
 const Task = mongoose.model("Task", taskSchema);
+
+const List = mongoose.model("List", listSchema);
 
 const task1 = new Task({
   name: "Welcome to the todo list",
@@ -50,11 +63,11 @@ app.get("/", (req, res) => {
       Task.insertMany(defaultItems)
         .then(() => {
           console.log("Successfully added task to database");
+          res.redirect("/");
         })
         .catch((err) => {
           console.log(err);
         });
-      res.redirect("/");
     }
     res.render("list", {
       listType: listType,
@@ -68,36 +81,61 @@ app.post("/", (req, res) => {
     name: req.body.newTask,
     date: date.getTodaysDate(),
   });
-  newTask.save();
-  res.redirect("/");
+
+  if (req.body.submitBtn.toLowerCase() === "home") {
+    newTask.save();
+    res.redirect("/");
+  } else {
+    List.findOne({ name: req.body.submitBtn.toLowerCase() }).then((list) => {
+      list.items.push(newTask);
+      list.save();
+      res.redirect("/" + req.body.submitBtn.toLowerCase());
+    });
+  }
 });
 
 app.post("/delete", (req, res) => {
-  Task.findByIdAndDelete({ _id: req.body.checkbox })
-    .then(() => console.log("Task deleted"))
-    .catch((err) => console.log(err));
+  if (req.body.listName.toLowerCase() === "home") {
+    Task.findByIdAndDelete({ _id: req.body.checkbox })
+      .then(() => console.log("Task deleted"))
+      .catch((err) => console.log(err));
 
-  res.redirect("/");
+    res.redirect("/");
+  } else {
+    List.findOneAndUpdate(
+      { name: req.body.listName.toLowerCase() },
+      { $pull: { items: { _id: req.body.checkbox } } }
+    )
+      .then(() => {
+        res.redirect("/" + req.body.listName.toLowerCase());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 });
 
-// app.post("/", (req, res) => {
-//   if (req.body.submitBtn === "Home") {
-//     homeTaskList.push(req.body.newTask);
-//     res.redirect("/");
-//   } else {
-//     workTaskList.push(req.body.newTask);
-//     res.redirect("/work");
-//   }
-// });
-
-// app.get("/work", (req, res) => {
-//   let listType = "Work";
-//   res.render("list", {
-//     listType: listType,
-//     todayFullDate: fullDate,
-//     taskList: workTaskList,
-//   });
-// });
+app.get("/:customListName", (req, res) => {
+  if (req.params.customListName.toLowerCase() === "home") {
+    res.redirect("/");
+  } else {
+    List.findOne({ name: req.params.customListName.toLowerCase() }).then((list) => {
+      if (!list) {
+        const newList = new List({
+          name: req.params.customListName.toLowerCase(),
+          items: defaultItems,
+        });
+        newList.save();
+        res.redirect("/" + req.params.customListName);
+      } else {
+        res.render("list", {
+          listType: _.startCase(list.name),
+          taskList: list.items,
+        });
+      }
+    });
+  }
+});
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
