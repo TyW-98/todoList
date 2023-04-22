@@ -94,11 +94,24 @@ app.post("/", (req, res) => {
 });
 
 app.post("/delete", (req, res) => {
-  Task.findByIdAndDelete({ _id: req.body.checkbox })
-    .then(() => console.log("Task deleted"))
-    .catch((err) => console.log(err));
+  if (req.body.listName.toLowerCase() === "home") {
+    Task.findByIdAndDelete({ _id: req.body.checkbox })
+      .then(() => console.log("Task deleted"))
+      .catch((err) => console.log(err));
 
-  res.redirect("/");
+    res.redirect("/");
+  } else {
+    List.findOneAndUpdate(
+      { name: req.body.listName.toLowerCase() },
+      { $pull: { items: { _id: req.body.checkbox } } }
+    )
+      .then(() => {
+        res.redirect("/" + req.body.listName.toLowerCase());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 });
 
 app.get("/:customListName", (req, res) => {
