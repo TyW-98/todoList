@@ -4,6 +4,7 @@ const path = require("path");
 const https = require("https");
 const date = require(path.join(__dirname, "todaysDate.js"));
 const mongoose = require("mongoose");
+const _ = require("lodash");
 
 const app = express();
 
@@ -62,11 +63,11 @@ app.get("/", (req, res) => {
       Task.insertMany(defaultItems)
         .then(() => {
           console.log("Successfully added task to database");
+          res.redirect("/");
         })
         .catch((err) => {
           console.log(err);
         });
-      res.redirect("/");
     }
     res.render("list", {
       listType: listType,
@@ -118,7 +119,7 @@ app.get("/:customListName", (req, res) => {
   if (req.params.customListName.toLowerCase() === "home") {
     res.redirect("/");
   } else {
-    List.findOne({ name: req.params.customListName }).then((list) => {
+    List.findOne({ name: req.params.customListName.toLowerCase() }).then((list) => {
       if (!list) {
         const newList = new List({
           name: req.params.customListName.toLowerCase(),
@@ -128,7 +129,7 @@ app.get("/:customListName", (req, res) => {
         res.redirect("/" + req.params.customListName);
       } else {
         res.render("list", {
-          listType: list.name.toUpperCase(),
+          listType: _.startCase(list.name),
           taskList: list.items,
         });
       }
