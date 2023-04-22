@@ -80,8 +80,17 @@ app.post("/", (req, res) => {
     name: req.body.newTask,
     date: date.getTodaysDate(),
   });
-  newTask.save();
-  res.redirect("/");
+
+  if (req.body.submitBtn.toLowerCase() === "home") {
+    newTask.save();
+    res.redirect("/");
+  } else {
+    List.findOne({ name: req.body.submitBtn.toLowerCase() }).then((list) => {
+      list.items.push(newTask);
+      list.save();
+      res.redirect("/" + req.body.submitBtn.toLowerCase());
+    });
+  }
 });
 
 app.post("/delete", (req, res) => {
@@ -99,7 +108,7 @@ app.get("/:customListName", (req, res) => {
     List.findOne({ name: req.params.customListName }).then((list) => {
       if (!list) {
         const newList = new List({
-          name: req.params.customListName,
+          name: req.params.customListName.toLowerCase(),
           items: defaultItems,
         });
         newList.save();
