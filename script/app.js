@@ -23,7 +23,19 @@ const taskSchema = new mongoose.Schema({
   },
 });
 
+const listSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "Need to enter task name"],
+  },
+  items: {
+    type: [taskSchema],
+  },
+});
+
 const Task = mongoose.model("Task", taskSchema);
+
+const List = mongoose.model("List", listSchema);
 
 const task1 = new Task({
   name: "Welcome to the todo list",
@@ -80,24 +92,27 @@ app.post("/delete", (req, res) => {
   res.redirect("/");
 });
 
-// app.post("/", (req, res) => {
-//   if (req.body.submitBtn === "Home") {
-//     homeTaskList.push(req.body.newTask);
-//     res.redirect("/");
-//   } else {
-//     workTaskList.push(req.body.newTask);
-//     res.redirect("/work");
-//   }
-// });
-
-// app.get("/work", (req, res) => {
-//   let listType = "Work";
-//   res.render("list", {
-//     listType: listType,
-//     todayFullDate: fullDate,
-//     taskList: workTaskList,
-//   });
-// });
+app.get("/:customListName", (req, res) => {
+  if (req.params.customListName.toLowerCase() === "home") {
+    res.redirect("/");
+  } else {
+    List.findOne({ name: req.params.customListName }).then((list) => {
+      if (!list || list.length === 0) {
+        const newList = new List({
+          name: req.params.customListName,
+          items: defaultItems,
+        });
+        newList.save();
+        res.render("list", {
+          listType: req.params.customListType,
+          taskList: newList.items,
+        });
+      } else {
+        console.log("Not Working")
+      }
+    });
+  } 
+});
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
