@@ -1,14 +1,14 @@
 function toggleLineThrough(checkbox) {
-  let p = checkbox.parentElement.parentElement.querySelector("p");
+  let span = checkbox.parentElement.parentElement.previousElementSibling.querySelector("span");
   let taskDate =
-    checkbox.parentElement.parentElement.querySelector(".created-date");
+    checkbox.parentElement.parentElement.previousElementSibling.querySelector(".created-date");
   let originalDate = taskDate.dataset.originalDate;
 
   if (checkbox.checked) {
-    p.classList.add("task-done");
+    span.classList.add("task-done");
     taskDate.innerHTML = "Task Completed.";
   } else {
-    p.classList.remove("task-done");
+    span.classList.remove("task-done");
     taskDate.innerHTML = originalDate;
   }
 }

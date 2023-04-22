@@ -42,8 +42,14 @@ body {
     text-decoration: line-through;
 }
 
+.task-info:parent {
+    height: fit-content;
+}
+
 .task-info {
-    margin: auto 0;
+    position: relative;
+    top: 40%;
+    left: 80%
 }
 
 .task:first-child {

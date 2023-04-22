@@ -11,13 +11,15 @@
         <p><%= task.name %></p>
         <span class="created-date" data-original-date="<%= task.date %>">(<%= task.date %>)</span>
       </div>
-      <div class="task-info">
-        <input
-          type="checkbox"
-          class="task-checkbox"
-          onchange="toggleLineThrough(this)"
-        />
-      </div>
+      <form>
+        <div class="task-info">
+          <input
+            type="checkbox"
+            class="task-checkbox"
+            onchange="toggleLineThrough(this)"
+          />
+        </div>
+      </form>
     </div>
   <% }) %>
 

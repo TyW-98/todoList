@@ -69,11 +69,7 @@ app.post("/", (req, res) => {
     date: date.getTodaysDate(),
   });
   newTask.save();
-  res.redirect('/')
-  res.render("list",{
-    listType: "Home",
-    taskList: newTask
-  })
+  res.redirect("/");
 });
 
 // app.post("/", (req, res) => {
