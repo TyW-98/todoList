@@ -9,15 +9,19 @@
     <div class="task">
       <div class="task-text">
         <p><%= task.name %></p>
-        <span class="created-date" data-original-data="<%= todayFullDate %>">(<%= todayFullDate %>)</span>
+        <span class="created-date" data-original-date="<%= task.date %>">(<%= task.date %>)</span>
       </div>
-      <div class="task-info">
-        <input
-          type="checkbox"
-          class="task-checkbox"
-          onchange="toggleLineThrough(this)"
-        />
-      </div>
+      <form action="/delete" method="post" class="checkbox-form">
+        <div class="task-info">
+          <input
+            type="checkbox"
+            class="task-checkbox"
+            onchange="toggleLineThrough(this)"
+            name="checkbox"
+            value="<%= task._id %>"
+          />
+        </div>
+      </form>
     </div>
   <% }) %>
 
