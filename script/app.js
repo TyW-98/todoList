@@ -73,12 +73,11 @@ app.post("/", (req, res) => {
 });
 
 app.post("/delete", (req, res) => {
-  console.log(req.body);
-  Task.deleteOne({ _id: req.body.checkbox })
-    .then(() => console.log("Deleted task"))
+  Task.findByIdAndDelete({ _id: req.body.checkbox })
+    .then(() => console.log("Task deleted"))
     .catch((err) => console.log(err));
 
-  res.redirect('/')
+  res.redirect("/");
 });
 
 // app.post("/", (req, res) => {
