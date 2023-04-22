@@ -97,21 +97,21 @@ app.get("/:customListName", (req, res) => {
     res.redirect("/");
   } else {
     List.findOne({ name: req.params.customListName }).then((list) => {
-      if (!list || list.length === 0) {
+      if (!list) {
         const newList = new List({
           name: req.params.customListName,
           items: defaultItems,
         });
         newList.save();
-        res.render("list", {
-          listType: req.params.customListType,
-          taskList: newList.items,
-        });
+        res.redirect("/" + req.params.customListName);
       } else {
-        console.log("Not Working")
+        res.render("list", {
+          listType: list.name.toUpperCase(),
+          taskList: list.items,
+        });
       }
     });
-  } 
+  }
 });
 
 app.listen(3000, () => {
