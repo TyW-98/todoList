@@ -11,12 +11,14 @@
         <p><%= task.name %></p>
         <span class="created-date" data-original-date="<%= task.date %>">(<%= task.date %>)</span>
       </div>
-      <form>
+      <form action="/delete" method="post" class="checkbox-form">
         <div class="task-info">
           <input
             type="checkbox"
             class="task-checkbox"
             onchange="toggleLineThrough(this)"
+            name="checkbox"
+            value="<%= task._id %>"
           />
         </div>
       </form>

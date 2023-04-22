@@ -72,6 +72,15 @@ app.post("/", (req, res) => {
   res.redirect("/");
 });
 
+app.post("/delete", (req, res) => {
+  console.log(req.body);
+  Task.deleteOne({ _id: req.body.checkbox })
+    .then(() => console.log("Deleted task"))
+    .catch((err) => console.log(err));
+
+  res.redirect('/')
+});
+
 // app.post("/", (req, res) => {
 //   if (req.body.submitBtn === "Home") {
 //     homeTaskList.push(req.body.newTask);
