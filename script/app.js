@@ -20,7 +20,7 @@ const taskSchema = new mongoose.Schema({
   },
   date: {
     type: String,
-  }
+  },
 });
 
 const Task = mongoose.model("Task", taskSchema);
@@ -56,12 +56,24 @@ app.get("/", (req, res) => {
         });
       res.redirect("/");
     }
-    console.log(task.date);
     res.render("list", {
       listType: listType,
       taskList: task,
     });
   });
+});
+
+app.post("/", (req, res) => {
+  const newTask = new Task({
+    name: req.body.newTask,
+    date: date.getTodaysDate(),
+  });
+  newTask.save();
+  res.redirect('/')
+  res.render("list",{
+    listType: "Home",
+    taskList: newTask
+  })
 });
 
 // app.post("/", (req, res) => {
