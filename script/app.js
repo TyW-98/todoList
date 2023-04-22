@@ -18,25 +18,29 @@ const taskSchema = new mongoose.Schema({
     type: String,
     required: [true, "Need to enter task name"],
   },
+  date: {
+    type: String,
+  }
 });
 
 const Task = mongoose.model("Task", taskSchema);
 
 const task1 = new Task({
-  name: "task1",
+  name: "Welcome to the todo list",
+  date: date.getTodaysDate(),
 });
 
 const task2 = new Task({
-  name: "task2",
+  name: "Enter new task below and press + to add new task",
+  date: date.getTodaysDate(),
 });
 
 const task3 = new Task({
-  name: "task3",
+  name: "Check the tick box to delete task",
+  date: date.getTodaysDate(),
 });
 
 const defaultItems = [task1, task2, task3];
-
-const fullDate = date.getTodaysDate();
 
 app.get("/", (req, res) => {
   let listType = "Home";
@@ -52,10 +56,9 @@ app.get("/", (req, res) => {
         });
       res.redirect("/");
     }
-
+    console.log(task.date);
     res.render("list", {
       listType: listType,
-      todayFullDate: fullDate,
       taskList: task,
     });
   });
