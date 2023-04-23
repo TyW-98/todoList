@@ -14,5 +14,4 @@ function toggleLineThrough(checkbox) {
     taskDate.innerHTML = originalDate;
   }
 
-  
 }
