@@ -6,9 +6,11 @@ const date = require(path.join(__dirname, "todaysDate.js"));
 const mongoose = require("mongoose");
 const _ = require("lodash");
 
+require("dotenv").config({ path: ".env" });
+
 const app = express();
 
-mongoose.connect("mongodb://127.0.0.1:27017/todoListDB");
+mongoose.connect(process.env.URL);
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
